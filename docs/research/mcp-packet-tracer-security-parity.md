@@ -112,6 +112,7 @@ repositories and generates repository-visible alerts for detected credentials.[^
 | Existing CodeQL | Latest PTBuilder default analysis at baseline commit | JavaScript/TypeScript analysis completed with zero results |
 | Live settings | Immediate REST read-back after each mutation | All three target settings match the source |
 | Open security alerts after enablement | Dependabot, secret-scanning, and CodeQL alert endpoints | 0 open alerts in each category |
+| Pull request CI | PTBuilder PR #1 at `2364781b4ac5b25c1ec52ff316124e1d470d7dea` | JavaScript validation passed in 31s; dependency-review jobs passed in 6s and 7s; CodeQL analysis passed in 54s; CodeQL gate passed in 3s |
 
 The privileged Dependabot workflow does not check out or execute pull-request
 code. Its permissions are limited to repository content and pull requests, and
@@ -134,6 +135,8 @@ documentation rather than an independent per-repository response.
 | Three live-setting gaps | High | Source/target API comparison, official response contracts, and post-mutation read-back |
 | Workflow adaptation | High | Source precedent, PTBuilder tracked-file inventory, RED/GREEN validator, YAML parser, and workflow linter |
 | Copilot Autofix repository state | Thin | GitHub documents the default behavior, but the attempted repository endpoint returned `404` for both repos |
+
+The first PR run is available in [PTBuilder pull request #1](https://github.com/A-Town-corp/PTBuilder/pull/1).[^8]
 
 ## Research Log
 
@@ -168,3 +171,4 @@ the absence of target workflow precedent.
 [^5]: [REST API endpoints for repositories](https://docs.github.com/en/rest/repos/repos?apiVersion=latest) — Repository security fields plus vulnerability-alert and private-reporting endpoints.
 [^6]: [Enabling secret scanning for a repository](https://docs.github.com/en/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enable-secret-scanning) — Availability and enablement behavior for secret scanning.
 [^7]: [About Autofix for code scanning](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/autofix-for-code-scanning) — Current CodeQL Autofix availability and default-enable behavior.
+[^8]: [PTBuilder pull request #1](https://github.com/A-Town-corp/PTBuilder/pull/1) — Target implementation, review diff, and GitHub-hosted check results.
