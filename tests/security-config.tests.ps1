@@ -80,7 +80,7 @@ Assert-Contains $ciWorkflow "pwsh -NoProfile -File ./tests/security-config.tests
 
 $codeqlWorkflow = $contents[".github/workflows/codeql.yml"]
 Assert-Contains $codeqlWorkflow 'name: "CodeQL advanced setup (disabled)"' "CodeQL workflow"
-Assert-Contains $codeqlWorkflow 'if: ${{ false }}' "CodeQL workflow"
+Assert-Contains $codeqlWorkflow "if: github.event_name == 'pull_request'" "CodeQL workflow"
 Assert-Contains $codeqlWorkflow "javascript-typescript" "CodeQL workflow"
 Assert-NotContains $codeqlWorkflow "language: python" "CodeQL workflow"
 

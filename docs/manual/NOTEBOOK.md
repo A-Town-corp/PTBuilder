@@ -68,3 +68,17 @@ GitHub Actions workflows. The task is to mirror the security posture added to
   JavaScript validation and artifact-presence checks.
 - The unchanged validator reached GREEN with `Security configuration validation
   passed.` and reported 10 security files, 9 JavaScript files, and `Builder.pts`.
+- `actionlint` 1.7.12 then failed deterministically at
+  `.github\workflows\codeql.yml:12:9` with `constant expression "false" in
+  condition ... [if-cond]`.
+- **Debug root cause:** The source precedent disables its advanced CodeQL job
+  with a literal `${{ false }}`, which GitHub accepts but `actionlint` correctly
+  treats as a removable constant condition.
+- **Pattern difference:** Existing source workflows use event-derived conditions
+  such as `github.event_name == 'pull_request'`; the disabled CodeQL workflow is
+  triggered only by `workflow_dispatch`, so that condition is unreachable while
+  remaining valid workflow syntax.
+- **Hypothesis and experiment:** Requiring the event-derived condition in the
+  validator will first fail against the literal condition (RED); replacing only
+  that condition will then make both the validator and the original `actionlint`
+  reproduction pass (GREEN).
