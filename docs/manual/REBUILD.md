@@ -26,7 +26,7 @@ Expected final output:
 
 ```text
 Security configuration validation passed.
-Validated 10 security files, 10 JavaScript files, and Builder.pts.
+Validated 10 security files, 9 JavaScript files, and Builder.pts.
 ```
 
 ## Packet Tracer artifact
