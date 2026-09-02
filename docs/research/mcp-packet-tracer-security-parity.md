@@ -113,6 +113,7 @@ repositories and generates repository-visible alerts for detected credentials.[^
 | Live settings | Immediate REST read-back after each mutation | All three target settings match the source |
 | Open security alerts after enablement | Dependabot, secret-scanning, and CodeQL alert endpoints | 0 open alerts in each category |
 | Pull request CI | PTBuilder PR #1 at `2364781b4ac5b25c1ec52ff316124e1d470d7dea` | JavaScript validation passed in 31s; dependency-review jobs passed in 6s and 7s; CodeQL analysis passed in 54s; CodeQL gate passed in 3s |
+| Merged `main` CI | Merge commit `c030016b40e4cef730aac84b3dd75691075f3d06` | JavaScript validation passed in 23s; push-only source-integrity validation passed in 19s; CodeQL JavaScript analysis passed in 1m17s[^9] |
 
 The privileged Dependabot workflow does not check out or execute pull-request
 code. Its permissions are limited to repository content and pull requests, and
@@ -138,6 +139,16 @@ documentation rather than an independent per-repository response.
 
 The first PR run is available in [PTBuilder pull request #1](https://github.com/A-Town-corp/PTBuilder/pull/1).[^8]
 
+The merged CI emitted a non-failing annotation that `actions/checkout@v4`
+targets deprecated Node.js 20 while GitHub forces the action onto Node.js 24.
+The version remains aligned with MCP-Packet-Tracer; a coordinated upgrade is
+recorded in the project backlog.
+
+A final source refresh after the merge returned the same source head and the
+same 21-commit local-day inventory. Final live read-back showed identical
+source/target states for every repository-wide control in section 3; the only
+intentional CodeQL difference is the detected language set.
+
 ## Research Log
 
 | # | Query | Tool | New sources | What it added |
@@ -153,7 +164,7 @@ The first PR run is available in [PTBuilder pull request #1](https://github.com/
 
 **Totals:** 8 research rounds; 8 web search queries; 29 GitHub API/CLI
 endpoint requests during research; 2 repository clones; 25 unique web-result
-URLs returned; 11 source-tip files read in full; 7 sources cited.
+URLs returned; 11 source-tip files read in full; 9 sources cited.
 
 **Dead ends:** The attempted CodeQL Autofix settings endpoint returned `404` for
 both repositories. The first direct open of the private-vulnerability-reporting
@@ -172,3 +183,4 @@ the absence of target workflow precedent.
 [^6]: [Enabling secret scanning for a repository](https://docs.github.com/en/code-security/how-tos/secure-your-secrets/detect-secret-leaks/enable-secret-scanning) — Availability and enablement behavior for secret scanning.
 [^7]: [About Autofix for code scanning](https://docs.github.com/en/enterprise-cloud@latest/code-security/concepts/code-scanning/autofix-for-code-scanning) — Current CodeQL Autofix availability and default-enable behavior.
 [^8]: [PTBuilder pull request #1](https://github.com/A-Town-corp/PTBuilder/pull/1) — Target implementation, review diff, and GitHub-hosted check results.
+[^9]: [PTBuilder post-merge Actions runs](https://github.com/A-Town-corp/PTBuilder/actions?query=branch%3Amain+event%3Apush) — Main-branch CI, Security checks, and default CodeQL verification.

@@ -106,3 +106,35 @@ GitHub Actions workflows. The task is to mirror the security posture added to
   CodeQL JavaScript analysis passed in 54 seconds, and the CodeQL gate passed in
   3 seconds. The push-only source-integrity job skipped on the pull request as
   designed.
+- Merged pull request #1 as
+  `c030016b40e4cef730aac84b3dd75691075f3d06`. Main-branch JavaScript validation
+  passed in 23 seconds and the push-only source-integrity job passed in 19
+  seconds. GitHub warned that source-precedent `actions/checkout@v4` targets
+  deprecated Node.js 20; a coordinated upgrade for both parity repositories is
+  recorded in `BACKLOG.md` rather than changing PTBuilder alone.
+- Main-branch CodeQL JavaScript analysis passed in 1 minute 17 seconds. A final
+  source refresh showed MCP-Packet-Tracer remained at
+  `3e856a832a476704edd1686ed733deddf8741916` with 21 commits in the 2026-09-02
+  Vienna window. Live read-back confirmed both repositories match on
+  vulnerability alerts, secret scanning, private reporting, Dependabot security
+  updates, push protection, repository auto-merge, Actions policy, workflow
+  token policy, and empty rulesets. CodeQL remains configured per repository
+  language: Actions/JavaScript/Python on the source and JavaScript on PTBuilder.
+- A final local Prettier rerun after switching from the feature branch to
+  `main` reported all seven YAML files as style warnings even though Git showed
+  none modified.
+- **Debug root cause:** `git ls-files --eol` reported `i/lf w/crlf` for every
+  YAML file and `core.autocrlf=true`; without a Prettier config, Prettier 3.9.6
+  defaults to LF and treats Git's clean Windows CRLF checkout as formatting
+  drift.
+- **Pattern difference:** The earlier passing run inspected newly created LF
+  worktree files before Git checkout normalization. The later run inspected the
+  same LF index blobs after Git produced CRLF worktree files on Windows.
+- **Hypothesis and experiment:** Running the same pinned Prettier check with its
+  documented `--end-of-line auto` option will validate YAML structure/style
+  without misclassifying Git's clean Windows line endings; require a clean pass
+  while `git status` continues to show no YAML modifications.
+- Prettier 3.9.6 listed `--end-of-line <lf|crlf|cr|auto>` in its local help.
+  The `auto` check passed with `All matched files use Prettier code style!`, and
+  Git continued to report no YAML modifications. The original warning no longer
+  reproduces under the cross-platform verification command.
