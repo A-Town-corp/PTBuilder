@@ -87,3 +87,16 @@ GitHub Actions workflows. The task is to mirror the security posture added to
   validator passed, `actionlint` 1.7.12 emitted no findings, and Prettier 3.9.6
   reported all workflow YAML files use its expected style. This is the second
   GREEN checkpoint evidence.
+- Enabled PTBuilder vulnerability alerts/dependency graph, secret scanning, and
+  private vulnerability reporting with GitHub's 2026-03-10 REST API version.
+  Both PUT requests returned HTTP 204; the repository PATCH and immediate
+  read-back reported `secret_scanning.status=enabled`; private reporting read
+  back as `{"enabled":true}`.
+- Security review confirmed the privileged Dependabot workflow never checks out
+  pull-request code. It also exposed an inherited parity limitation: workflow
+  pull-request approval and repository auto-merge are disabled on both
+  repositories, so approval and queued merge are not enforceable controls in
+  the current live configuration.
+- Immediate post-enable alert queries returned zero open Dependabot alerts,
+  zero open secret-scanning alerts, and zero open CodeQL alerts. A branch-diff
+  pattern scan found no common credential formats.

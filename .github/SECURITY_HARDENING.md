@@ -44,8 +44,10 @@ repositories together and revise this table in the same pull request.
 - Do not enable the advanced CodeQL workflow while default setup is configured.
 - The privileged `pull_request_target` workflow must never check out or execute
   pull-request code.
-- Patch-only Dependabot updates may be approved and queued for squash merge;
-  minor and major updates require maintainer review.
+- The Dependabot workflow attempts approval and squash merge only for patch
+  updates. Repository auto-merge and Actions pull-request approval are disabled
+  in both parity repositories, so maintainer action may still be required.
+  Minor and major updates always require maintainer review.
 - `Builder.pts` cannot be rebuilt in CI until an exact Packet Tracer export
   process is documented and verified.
 

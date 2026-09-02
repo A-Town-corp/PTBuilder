@@ -8,3 +8,4 @@
 | `pull_request_target` receives a privileged token | The Dependabot auto-merge workflow must never check out or execute pull-request code |
 | GitHub-hosted settings are not stored in Git | Vulnerability alerts, secret scanning, and private vulnerability reporting require separate API verification after file changes merge |
 | MCP-Packet-Tracer's hardening guide is partly aspirational | Branch protection, rulesets, auto-merge, push protection, and Dependabot security updates are currently disabled there and must not be described as active parity controls |
+| Actions pull-request approval and repository auto-merge are disabled in both repositories | The copied Dependabot workflow's approval and queued-merge steps cannot be relied upon until those shared settings are enabled in both repositories |

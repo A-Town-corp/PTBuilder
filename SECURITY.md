@@ -56,8 +56,10 @@ repository's scope.
 - Dependabot groups weekly GitHub Actions version updates.
 - Dependency review rejects new moderate-or-higher vulnerable dependencies and
   disallowed AGPL-only licenses.
-- Patch-only Dependabot updates can be approved and queued without executing
-  untrusted pull-request code.
+- The Dependabot workflow restricts approval and merge attempts to patch-only
+  updates and never executes untrusted pull-request code. The current parity
+  baseline leaves repository auto-merge and Actions pull-request approval
+  disabled, so maintainer action may still be required.
 - CI checks JavaScript syntax, the repository security configuration, and the
   presence of the distributed `Builder.pts` artifact.
 - GitHub vulnerability alerts, secret scanning, and private vulnerability
