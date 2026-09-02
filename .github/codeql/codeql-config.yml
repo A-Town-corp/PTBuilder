@@ -1,0 +1,10 @@
+name: Security-extended CodeQL configuration
+
+queries:
+  - uses: security-extended
+
+paths-ignore:
+  # These are generated or vendored artifacts, not maintained source code.
+  - "Builder.pts"
+  - "source/interface/bootstrap.bundle.min.js"
+  - "source/interface/bootstrap.min.css"
