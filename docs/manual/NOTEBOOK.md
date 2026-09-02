@@ -82,3 +82,8 @@ GitHub Actions workflows. The task is to mirror the security posture added to
   validator will first fail against the literal condition (RED); replacing only
   that condition will then make both the validator and the original `actionlint`
   reproduction pass (GREEN).
+- The new assertion failed only on the old literal condition, establishing RED.
+  After replacing it with the unreachable pull-request event condition, the
+  validator passed, `actionlint` 1.7.12 emitted no findings, and Prettier 3.9.6
+  reported all workflow YAML files use its expected style. This is the second
+  GREEN checkpoint evidence.

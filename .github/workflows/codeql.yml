@@ -9,7 +9,8 @@ on:
 jobs:
   analyze:
     name: Analyze (${{ matrix.language }})
-    if: ${{ false }} # Do not run advanced setup alongside default setup.
+    # This workflow only accepts workflow_dispatch, so pull_request is unreachable.
+    if: github.event_name == 'pull_request'
     runs-on: windows-latest
     timeout-minutes: 15
     permissions:
