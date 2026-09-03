@@ -1,4 +1,4 @@
-**NEW:** Check out the [cisco-pt-mcp](https://muhammadbalawal.github.io/cisco-pt-mcp/) extension: Have AI create your Packet Tracer networks! Open source!
+**NEW:** Check out the [MCP-Packet-Tracer](https://github.com/A-Town-corp/MCP-Packet-Tracer) extension: Have AI create your Packet Tracer networks! Open source!
 
 ---
 
